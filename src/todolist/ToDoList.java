@@ -104,6 +104,10 @@ public class ToDoList {
                 case 5:
                     System.out.println("Programa encerrado. Ate mais!");
                     break;
+                default:
+                    System.out.println("Opcao invalida!");
+                    
+                    break;
             }
             
         }
