@@ -4,6 +4,8 @@
  */
 package todolist;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -124,15 +126,15 @@ public class TelaToDoList extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextFieldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextFieldConcluidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldConcluidas, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldNaoConcluidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldNaoConcluidas, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -223,7 +225,7 @@ public class TelaToDoList extends javax.swing.JFrame {
     
     String[] dados = tarefas.get(indiceTarefaSelecionada).split(";");
     
-    tarefas.set(indiceTarefaSelecionada, dados[0] + ";" + CONCLUIDA);
+    tarefas.set(indiceTarefaSelecionada, dados[0] + ";" + CONCLUIDA + ";" + dados[2]);
     
     filtrarTabela();
     
@@ -280,7 +282,11 @@ public class TelaToDoList extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "A tarefa " + jTextFieldDescricaoTarefa.getText() + " já existe!");
             return;
         }
-        tarefas.add(jTextFieldDescricaoTarefa.getText() + ";" + NAO_CONCLUIDA);
+        
+        LocalDateTime dataAtual = LocalDateTime.now();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        
+        tarefas.add(jTextFieldDescricaoTarefa.getText() + ";" + NAO_CONCLUIDA + ";" + dataAtual.format(formato));
         
         preencherTabela();
         
@@ -332,6 +338,41 @@ public class TelaToDoList extends javax.swing.JFrame {
                return false;
         }
     
+    private void atualizarEstatisticas(){
+        jTextFieldTotal.setText(Integer.toString(tarefas.size()));
+        
+        jTextFieldConcluidas.setText(String.valueOf(retornarTotalConcluidas()));
+        jTextFieldConcluidas.setText(String.valueOf(retornarTotalNaoConcluidas()));
+    }
+    
+    private int retornarTotalConcluidas(){
+        int quantidadeConcluida = 0;
+        
+        for(String tarefa : tarefas){
+            String[] dados = tarefa.split(";");
+        
+            if (dados[1].equals(CONCLUIDA)){
+                quantidadeConcluida++;
+        }
+
+    }
+    return quantidadeConcluida;
+    }
+    
+    private int retornarTotalNaoConcluidas(){
+        int quantidadeNaoConcluida = 0;
+        
+        for(String tarefa : tarefas){
+            String[] dados = tarefa.split(";");
+        
+            if (dados[1].equals(NAO_CONCLUIDA)){
+                quantidadeNaoConcluida++;
+        }
+
+    }
+    return quantidadeNaoConcluida;
+    }
+    
     private void preencherTabela(){
         ArrayList<String> listaTarefas;
 
@@ -348,7 +389,8 @@ public class TelaToDoList extends javax.swing.JFrame {
 
         model.addRow(new Object[]{
                 dados[0],
-                dados[1]
+                dados[1],
+                dados[2]
             });
         }
     }
