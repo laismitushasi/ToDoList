@@ -15,32 +15,35 @@ public class CadastroCliente extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CadastroCliente.class.getName());
 
     /**
-     * Creates new form CadastroCliente
+     * Creates new form CastroCliente
      */
     public CadastroCliente() {
         initComponents();
     }
-private Boolean validacoes(){
-    if(jTextFieldNome.getText().isEmpty()){
-JOptionPane.showMessageDialog(null, " O campo de nome não pode estar vazio");
-    jTextFieldNome.requestFocus();
-    return false;
+    
+    private Boolean validacoes(){
+        if (jTextFieldNome.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "O campo de nome não pode estar vazio");
+            jTextFieldNome.requestFocus();
+            return false;
+        }
+        if (jTextFieldCPF.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "O campo de CPF não pode estar vazio");
+            jTextFieldCPF.requestFocus();
+            return false;
+        }
+        if (!jRadioButtonMasculino.isSelected() && !jRadioButtonFeminino.isSelected()){
+            JOptionPane.showMessageDialog(null, "Insira ser gênero");
+            return false;
+        }
+        if (!jCheckBoxTermos.isSelected()){
+            JOptionPane.showMessageDialog(null, "Os termos de uso não foram aceitos.");
+            return false;
+        }
+        
+        return true;
     }
-      if(jTextFieldCPF.getText().isEmpty()) {
-          JOptionPane.showMessageDialog(null, "O campo de CPF não pode estar vazio");
-          jTextFieldCPF.requestFocus();
-          return false;
-      }
-      if(!jRadioButtonMasculino.isSelected() && !jRadioButtonFeminino.isSelected()){
-          JOptionPane.showMessageDialog(null, "Opção de gênero inválida");
-          return false;
-      }
-      if (!jCheckBoxTermos.isSelected()){
-          JOptionPane.showMessageDialog(null, "Os termos de uso não foram aceitos");
-          return false; 
-      }
-      return true;
-}
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,7 +53,6 @@ JOptionPane.showMessageDialog(null, " O campo de nome não pode estar vazio");
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
         buttonGroupGenero = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -60,47 +62,42 @@ JOptionPane.showMessageDialog(null, " O campo de nome não pode estar vazio");
         jLabel4 = new javax.swing.JLabel();
         jComboBoxCidade = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        jRadioButtonFeminino = new javax.swing.JRadioButton();
         jRadioButtonMasculino = new javax.swing.JRadioButton();
+        jRadioButtonFeminino = new javax.swing.JRadioButton();
         jCheckBoxTermos = new javax.swing.JCheckBox();
         jButtonSalvar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
 
-        jTextField1.setText("jTextField1");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Cadastro de Cliente");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("Nome");
+        jLabel2.setText("Nome:");
 
         jTextFieldNome.addActionListener(this::jTextFieldNomeActionPerformed);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("CPF");
+        jLabel3.setText("CPF:");
 
         jTextFieldCPF.addActionListener(this::jTextFieldCPFActionPerformed);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setText("Cidade");
+        jLabel4.setText("CIdade:");
 
-        jComboBoxCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Campo Mourão", "Maringá", "Cianorte", "Mamborê", "Londrina", "Araruna", "Curitiba", " " }));
+        jComboBoxCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Campo Mourão", "Maringá", "Mambore", "Pitanga", "Engenheiro Beltrão", "Cascavel", "Paranavaí", "Santa Catarina", "Aldeia da Folha", "Grand Line", "Jupiter", "Plutão", "Asteroide B-612" }));
         jComboBoxCidade.addActionListener(this::jComboBoxCidadeActionPerformed);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setText("Genêro");
+        jLabel5.setText("Genêro:");
 
-        buttonGroupGenero.add(jRadioButtonFeminino);
-        jRadioButtonFeminino.setText("Feminino");
-        jRadioButtonFeminino.addActionListener(this::jRadioButtonFemininoActionPerformed);
-
-        buttonGroupGenero.add(jRadioButtonMasculino);
         jRadioButtonMasculino.setText("Masculino");
-        jRadioButtonMasculino.addActionListener(this::jRadioButtonMasculinoActionPerformed);
 
-        jCheckBoxTermos.setText("Aceito os termos de utilização do sistema");
+        jRadioButtonFeminino.setText("Feminino");
+
+        jCheckBoxTermos.setText("Aceitos os termos de uso do sistema");
+        jCheckBoxTermos.addActionListener(this::jCheckBoxTermosActionPerformed);
 
         jButtonSalvar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonSalvar.setText("Salvar");
@@ -118,38 +115,38 @@ JOptionPane.showMessageDialog(null, " O campo de nome não pode estar vazio");
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(109, 109, 109)
+                                .addGap(118, 118, 118)
                                 .addComponent(jLabel1))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jLabel5))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jRadioButtonMasculino)
-                                .addGap(24, 24, 24)
-                                .addComponent(jRadioButtonFeminino)))
-                        .addGap(0, 120, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBoxCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jRadioButtonMasculino)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRadioButtonFeminino)))))
+                        .addGap(0, 111, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldCPF)
                                     .addComponent(jTextFieldNome)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jComboBoxCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addComponent(jTextFieldCPF)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jCheckBoxTermos)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jButtonSalvar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButtonCancelar)))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
@@ -163,21 +160,20 @@ JOptionPane.showMessageDialog(null, " O campo de nome não pode estar vazio");
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jComboBoxCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButtonFeminino)
-                    .addComponent(jRadioButtonMasculino))
-                .addGap(68, 68, 68)
+                    .addComponent(jLabel5)
+                    .addComponent(jRadioButtonMasculino)
+                    .addComponent(jRadioButtonFeminino))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCheckBoxTermos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -201,22 +197,17 @@ JOptionPane.showMessageDialog(null, " O campo de nome não pode estar vazio");
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxCidadeActionPerformed
 
-    private void jRadioButtonMasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMasculinoActionPerformed
+    private void jCheckBoxTermosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxTermosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonMasculinoActionPerformed
-
-    private void jRadioButtonFemininoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFemininoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonFemininoActionPerformed
+    }//GEN-LAST:event_jCheckBoxTermosActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-  if(!validacoes()){
-      return;
-      
-  }
-  JOptionPane.showMessageDialog(null,"cadastro realizado com sucesso!");
-  
-  System.exit(0);
+        if (!validacoes()){
+            return;
+        }
+        
+        JOptionPane.showMessageDialog(null, "cadastro realizado com sucesso.");
+        System.exit(0);
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     /**
@@ -257,7 +248,6 @@ JOptionPane.showMessageDialog(null, " O campo de nome não pode estar vazio");
     private javax.swing.JLabel jLabel5;
     private javax.swing.JRadioButton jRadioButtonFeminino;
     private javax.swing.JRadioButton jRadioButtonMasculino;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldCPF;
     private javax.swing.JTextField jTextFieldNome;
     // End of variables declaration//GEN-END:variables
